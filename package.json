@@ -1,5 +1,5 @@
 {
-  "name": "dog-online",
+  "name": "test",
   "private": true,
   "scripts": {
     "start": "meteor run"
