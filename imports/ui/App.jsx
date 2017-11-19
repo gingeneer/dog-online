@@ -1,15 +1,15 @@
 import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Session } from 'meteor/session';
 import { Random } from 'meteor/random';
 
 import { Games } from '../api/games.js';
-import { Players } from '../api/players.js';
+import { Boards } from '../api/boards.js';
 
 import Start from './Start.jsx';
 import Lobby from './Lobby.jsx';
+import Board from './Board.jsx';
 
 class App extends Component {
     constructor(props) {
@@ -22,9 +22,6 @@ class App extends Component {
             screen: 'start',
         };
 
-        // this.setScreen(nextScreen) = this.setState( { screen: nextScreen } );
-        // this.handleChange = this.handleChange.bind(this);
-        // this.handleSubmit = this.handleSubmit.bind(this)
         this.setScreen = this.setScreen.bind(this)
     }
 
@@ -60,7 +57,6 @@ class App extends Component {
                         playerNames={playerNames}
                         setScreen={this.setScreen}
                     />
-                    started? {game.started}
                 </div>
             );
         }
@@ -69,33 +65,20 @@ class App extends Component {
     renderBoard() {
         if (this.state.screen === 'board') {
             return (
-                <div>
-                    this is board
-                </div>
+                <Board />
             );
-        } else {
-
         }
     }
 
     render() {
         return (
-            <div>
-                <div>
-                    {this.state.screen}<br/>
-                    {/*{this.state.sessionId}<br/>*/}
-                    {/*{this.state.playerName}<br/>*/}
-                    {/*{this.state.gameId}<br/>*/}
-                    {/*{this.state.newGame}<br/>*/}
-                </div>
-                <div className="container">
-                    <header>
-                        <h1>Dog Online</h1>
-                    </header>
-                    {this.renderStart()}
-                    {this.renderLobby()}
-                    {this.renderBoard()}
-                </div>
+            <div className="container">
+                <header>
+                    <h1>Dog Online</h1>
+                </header>
+                {this.renderStart()}
+                {this.renderLobby()}
+                {this.renderBoard()}
             </div>
         );
     }

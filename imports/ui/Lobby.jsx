@@ -12,6 +12,7 @@ export default class Lobby extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        this.props.setScreen('board');
         Meteor.call('games.start', this.props.gameId);
     }
 
