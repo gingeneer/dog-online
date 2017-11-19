@@ -98,12 +98,12 @@ App.propTypes = {
   currentUser: PropTypes.object,
 };
 
-export default createContainer(() => {
-  Meteor.subscribe('tasks');
-
-  return {
-    tasks: Tasks.find({}, { sort: { createdAt: -1 } }).fetch(),
-    incompleteCount: Tasks.find({ checked: { $ne: true } }).count(),
-    currentUser: Meteor.user(),
-  };
-}, App);
+// export default createContainer(() => {
+//   Meteor.subscribe('tasks');
+//
+//   return {
+//     tasks: Tasks.find({}, { sort: { createdAt: -1 } }).fetch(),
+//     incompleteCount: Tasks.find({ checked: { $ne: true } }).count(),
+//     currentUser: Meteor.user(),
+//   };
+// }, App);
