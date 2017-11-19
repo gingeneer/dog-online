@@ -44,14 +44,30 @@ class App extends Component {
 
     renderLobby() {
         if (this.state.screen === 'lobby') {
+            const sessionId = this.state.sessionId;
+            const game = Games.findOne({ sessionIds: sessionId });
+            const gameId = game._id;
+            const playerNames = game.playerNames;
+
+            if (game.started === 1) {
+                this.setScreen('board');
+            }
+
             return (
-                <Lobby />
+                <div>
+                    <Lobby
+                        gameId={gameId}
+                        playerNames={playerNames}
+                        setScreen={this.setScreen}
+                    />
+                    started? {game.started}
+                </div>
             );
         }
     }
 
     renderBoard() {
-        if (false) {
+        if (this.state.screen === 'board') {
             return (
                 <div>
                     this is board
@@ -84,15 +100,15 @@ class App extends Component {
         );
     }
 }
-//
-// App.propTypes = {
-//     games: PropTypes.array.isRequired,
-// };
-//
+
+App.propTypes = {
+    games: PropTypes.array.isRequired,
+};
+
 export default App = withTracker(() => {
-    // Meteor.subscribe('games');
+    Meteor.subscribe('games');
 
     return {
-        // games: Games.find({}, { sort: { createdAt: -1 } }).fetch(),
+        games: Games.find({}, { sort: { createdAt: -1 } }).fetch(),
     };
 })(App);

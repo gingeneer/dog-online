@@ -11,19 +11,32 @@ export default class Lobby extends Component {
     }
 
     handleSubmit(event) {
-
-
+        event.preventDefault();
+        Meteor.call('games.start', this.props.gameId);
     }
 
     renderPlayers() {
-        return (
-          <li>yes this is lobby</li>
-        );
+        const playerNames = this.props.playerNames;
+
+        return playerNames.map((player, i) => {
+            return (
+                <li key={i}>
+                    <b>{i+1}</b>  {player}
+                </li>
+            );
+        });
     }
 
     render() {
         return (
             <div>
+                <form className="start" onSubmit={this.handleSubmit} >
+                    <input
+                        type="submit"
+                        value="Start Game"
+                    />
+                    {this.props.gameId}
+                </form>
                 <ul>
                     {this.renderPlayers()}
                 </ul>
